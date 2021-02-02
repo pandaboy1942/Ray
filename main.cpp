@@ -5,7 +5,8 @@
 #include <cstring>
 //#include <unistd.h>
 #include "functions.h"
-#define PI 3.14159265358979323846
+#define PI 3.14159265359
+
 using namespace std;
 
 //screen dimensions
@@ -191,11 +192,22 @@ int main()
 	for(int j=0;j<WIDTH/dW;j++){
 		platno[i][j]=0;
 	}}
+	int i = 0;
 	while(1)
 	{
-		
+		//display:
+		printf("%d", i);
+		for (int i = 0; i < HEIGHT / dH; i++) {
+			for (int j = 0; j < WIDTH / dW; j++) {
+				printf("%c", platno[i][j]);
+			}
+			printf("\n");
+		}
+
+		//instead of system("cls") i used this because it looks smoother
+		gotoxy(0, 0);
 		camera cam(r,alfa,beta);
-		
+		i++;
 		for(int i=0;i<HEIGHT/dH;i++){
 		for(int j=0;j<WIDTH/dW;j++){
 			double origin[3]=
@@ -221,19 +233,12 @@ int main()
 			platno[i][j]=palette[color];
 		}}
 		
-		//display:
-		for(int i=0;i<HEIGHT/dH;i++){
-		for(int j=0;j<WIDTH/dW;j++){
-			printf("%c",platno[i][j]);
-		}
-		printf("\n");
-		}
-		
-		//instead of system("cls") i used this because it looks smoother
-		gotoxy(0,0);
+
 		//update camera position
 		alfa+=0.03*PI;
 		if(beta>PI/20)beta-=0.03*PI;
 	}
 	return 0;
 }
+
+
